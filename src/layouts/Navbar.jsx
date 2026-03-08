@@ -12,6 +12,23 @@ const navlinks = [
 export function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [isScrolled, setIsScrolled] = useState(false)
+    const [activeSection, setActiveSection] = useState('')
+
+    useEffect(() => {
+        const sections = document.querySelectorAll('section[id]');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setActiveSection('#' + entry.target.id);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        sections.forEach((section) => observer.observe(section));
+
+        return () => sections.forEach((section) => observer.unobserve(section));
+    }, [])
 
     useEffect(() => {
         const handleScroll = () => {
@@ -36,7 +53,7 @@ export function Navbar() {
                         {navlinks.map((link, index) => (
                             <a href={link.href}
                                 key={index}
-                                className='px-4 py-2 text-sm text-muted-foreground hover:text-foreground rounded-full hover:bg-surface'>{link.label}</a>
+                                className={`px-4 py-2 text-sm rounded-full ${activeSection === link.href ? 'text-primary bg-surface' : 'text-muted-foreground hover:text-foreground hover:bg-surface'}`}>{link.label}</a>
                         ))}
                     </div>
                 </div>
@@ -51,8 +68,8 @@ export function Navbar() {
                 </div>
 
                 {/* Mobile Menu Button */}
-                <button onClick={()=>setIsMobileMenuOpen((prev) => !prev)} className='md:hidden p-2 text-foreground cursor-pointer'>
-                    {isMobileMenuOpen ? <X size={24}/> : <Menu size={24} />}
+                <button onClick={() => setIsMobileMenuOpen((prev) => !prev)} className='md:hidden p-2 text-foreground cursor-pointer'>
+                    {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
             </nav>
 
@@ -63,7 +80,7 @@ export function Navbar() {
                         <a href={link.href}
                             key={index}
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className='text-lg text-muted-foreground hover:text-foreground py-2'>{link.label}</a>
+                            className={`text-lg py-2 ${activeSection === link.href ? 'text-primary' : 'text-muted-foreground hover:text-foreground'}`}>{link.label}</a>
                     ))}
 
                     <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}
