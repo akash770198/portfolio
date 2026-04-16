@@ -81,7 +81,7 @@ export function Hero() {
                 className="relative overflow-hidden rounded-full font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-primary bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25 px-8 py-4 text-lg inline-flex items-center gap-2">
                 Contact Me <ArrowRight className="w-5 h-5" />
               </a>
-              <a href='/resume/Akash_Kumar_Behuria_Resume.pdf' download>
+              <a href='/resume/Akash_Kumar_Behuria_CV.pdf' download>
                 <AnimatedBorderButton>
                   <Download className='w-5 h-5' />
                   Download CV
