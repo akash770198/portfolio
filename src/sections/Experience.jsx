@@ -2,11 +2,12 @@ import React from 'react'
 
 const experiences = [
   {
-    company: "Infofit software solutions",
+    company: "Infofit Software Solutions Pvt. Ltd.",
+    companyLink: "https://www.infofitsoftware.com/",
     role: "Full Stack Developer Intern",
     period: "Jan 2026 - Present",
     description: "Developing full-stack applications using React and Node.js, building REST APIs and integrating them with the frontend, working with MySQL databases, deploying applications and managing hosting environments, collaborating using Git, and gaining hands-on experience with AWS services such as EC2 and RDS.",
-    technologies: ["React.js", "Node.js", "REST APIs", "Git", "PostgreSQL", "AWS"],
+    technologies: ["React.js", "Node.js", "REST APIs", "Git", "AWS", "Docker", "Hostinger", "PostgreSQL", "MongoDB"],
     current: true
   }
 ]
@@ -53,7 +54,9 @@ export function Experience() {
                   <div className={`glass p-6 rounded-2xl border border-primary/30 hover:border-primary/50 transition-all duration-500`}>
                     <span className='text-sm text-primary font-medium'>{exp.period}</span>
                     <h3 className='text-xl font-semibold mt-2'>{exp.role}</h3>
-                    <p className='text-muted-foreground'>{exp.company}</p>
+                    <a href={exp.companyLink} target='_blank' rel='noopener noreferrer'>
+                      <p className='text-muted-foreground'>{exp.company}</p>
+                    </a>
                     <p className='text-sm text-muted-foreground mt-4'>{exp.description}</p>
                     <div className={`flex flex-wrap gap-2 mt-4 ${idx % 2 === 0 ? "md:justify-end" : ""}`}>{exp.technologies.map((tech, techIdx) => (
                       <span key={techIdx} className='px-3 py-1 bg-surface text-xs rounded-full text-muted-foreground'>{tech}</span>
